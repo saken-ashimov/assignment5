@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment #5 — JavaScript Basics</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/task1.js" defer></script>
+  <script src="js/task2.js" defer></script>
+  <script src="js/task3.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1>Assignment #5: JavaScript Basics</h1>
+      <nav class="main-nav">
+        <a href="#task1" class="nav-link">Task 1: Игра</a>
+        <a href="#task2" class="nav-link">Task 2: Канбан</a>
+        <a href="#task3" class="nav-link">Task 3: Форма</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <section id="task1" class="task-section">
+      <div class="section-header">
+        <span class="task-tag">Task 1 — Option A</span>
+        <h2>Игра «Больше или Меньше» (Higher or Lower)</h2>
+        <p class="section-desc">
+          Числа от <span id="range-text">1 до 100</span>. Для победы наберите серию из <strong id="target-text">5</strong> верных ответов подряд. Равные числа считаются правильным ответом.
+        </p>
+      </div>
+
+      <div id="game-message" class="status-banner status-neutral">
+        Угадайте: следующее число будет больше или меньше текущего?
+      </div>
+
+      <div class="game-stats">
+        <div class="stat-box">
+          <span>Текущее число:</span>
+          <strong id="current-number" class="big-number">50</strong>
+        </div>
+        <div class="stat-box">
+          <span>Жизни:</span>
+          <strong id="lives-count">3</strong>
+        </div>
+        <div class="stat-box">
+          <span>Серия (Streak):</span>
+          <strong id="streak-count">0</strong>
+        </div>
+        <div class="stat-box">
+          <span>Рекорд (Best):</span>
+          <strong id="best-streak">0</strong>
+        </div>
+        <div class="stat-box">
+          <span>Подсказки:</span>
+          <strong id="hints-left">1</strong>
+        </div>
+      </div>
+
+      <div class="battle-controls">
+        <button type="button" id="btn-higher" class="btn btn-primary">Больше (Higher)</button>
+        <button type="button" id="btn-lower" class="btn btn-secondary">Меньше (Lower)</button>
+        <button type="button" id="btn-hint" class="btn btn-outline">Подсказка</button>
+        <button type="button" id="btn-restart" class="btn btn-outline">Начать заново</button>
+      </div>
+    </section>
+
+
+    <section id="task2" class="task-section">
+      <div class="section-header">
+        <span class="task-tag">Task 2 — Option A</span>
+        <h2>Канбан-доска (Kanban Board)</h2>
+        <p class="section-desc">
+          В средней колонке «В работе» может находиться максимум 3 карточки.
+        </p>
+      </div>
+
+      <div class="kanban-stats-bar">
+        <div class="progress-info">
+          <span>Выполнено карточек: <strong id="kanban-progress-text">0 из 10 (0%)</strong></span>
+        </div>
+        <progress id="kanban-progress-bar" class="kanban-progress" value="0" max="100"></progress>
+      </div>
+
+      <div id="kanban-message" class="status-banner status-neutral">
+        Нажимайте кнопки на карточках, чтобы перемещать их между колонками.
+      </div>
+
+      <div class="kanban-toolbar">
+        <div class="toolbar-group">
+          <label for="kanban-tag-filter">Фильтр по тегу:</label>
+          <select id="kanban-tag-filter" class="form-select">
+            <option value="all">Все теги</option>
+            <option value="HTML">HTML</option>
+            <option value="CSS">CSS</option>
+            <option value="JS">JS</option>
+            <option value="Тесты">Тесты</option>
+            <option value="Архив">Архив (пусто)</option>
+          </select>
+        </div>
+
+        <div class="toolbar-group">
+          <label for="kanban-sort">Сортировка по приоритету:</label>
+          <select id="kanban-sort" class="form-select">
+            <option value="default">По умолчанию</option>
+            <option value="desc">По убыванию (3 → 1)</option>
+            <option value="asc">По возрастанию (1 → 3)</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="kanban-empty" class="empty-state hidden">
+        По выбранному тегу карточек не найдено.
+      </div>
+
+      <div id="kanban-board" class="kanban-board">
+        <div class="kanban-column">
+          <h3>К выполнению (To Do)</h3>
+          <div id="col-todo" class="column-cards"></div>
+        </div>
+
+        <div class="kanban-column">
+          <h3>В работе (In Progress — макс. 3)</h3>
+          <div id="col-progress" class="column-cards"></div>
+        </div>
+
+        <div class="kanban-column">
+          <h3>Готово (Done)</h3>
+          <div id="col-done" class="column-cards"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="task3" class="task-section">
+      <div class="section-header">
+        <span class="task-tag">Task 3 — Option A</span>
+        <h2>Заказ билетов (Ticket Builder)</h2>
+        <p class="section-desc">
+          Распроданные даты: <strong>2026-11-10</strong> и <strong>2026-11-20</strong>. Промокоды на скидку 20%: <strong>SALE20</strong>, <strong>AITU20</strong>.
+        </p>
+      </div>
+
+      <div id="form-summary" class="status-banner hidden"></div>
+
+      <div class="ticket-layout">
+        <form id="ticket-form" class="ticket-form" novalidate>
+          <div class="form-field">
+            <label for="ticket-event">1. Мероприятие *</label>
+            <select id="ticket-event" class="form-select" required>
+              <option value="">-- Выберите мероприятие --</option>
+              <option value="IT Конференция AITU">IT Конференция AITU</option>
+              <option value="Концерт живой музыки">Концерт живой музыки</option>
+            </select>
+            <p id="error-ticket-event" class="field-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="ticket-date">2. Дата *</label>
+            <input type="date" id="ticket-date" class="form-input" required min="2026-11-01" max="2026-12-31">
+            <p id="error-ticket-date" class="field-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="ticket-type">3. Тип билета *</label>
+            <select id="ticket-type" class="form-select" required>
+              <option value="standard">Стандарт (5000 ₸)</option>
+              <option value="vip">VIP (12000 ₸)</option>
+              <option value="student">Студенческий (3000 ₸)</option>
+            </select>
+            <p id="error-ticket-type" class="field-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="ticket-qty">4. Количество билетов *</label>
+            <input type="number" id="ticket-qty" class="form-input" required min="1" max="10" value="1">
+            <p id="error-ticket-qty" class="field-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="ticket-name">5. Имя и фамилия *</label>
+            <input type="text" id="ticket-name" class="form-input" required minlength="4" placeholder="Иван Иванов">
+            <p id="error-ticket-name" class="field-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="ticket-email">6. Email *</label>
+            <input type="email" id="ticket-email" class="form-input" required placeholder="user@mail.com">
+            <p id="error-ticket-email" class="field-error"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="ticket-promo">7. Промокод (необязательно)</label>
+            <input type="text" id="ticket-promo" class="form-input" placeholder="SALE20 или AITU20">
+            <p id="error-ticket-promo" class="field-error"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Оформить билет</button>
+        </form>
+
+        <div class="ticket-preview-panel">
+          <div class="ticket-preview-card">
+            <div class="ticket-preview-top">
+              <span id="preview-type-badge" class="badge badge-ticket">Стандарт</span>
+              <span id="preview-seats-left" class="seats-indicator">Осталось мест: 8</span>
+            </div>
+            <h3 id="preview-event">Мероприятие не выбрано</h3>
+            <p>Дата: <strong id="preview-date">—</strong></p>
+            <p>Покупатель: <strong id="preview-name">—</strong></p>
+            <p>Количество: <strong id="preview-qty">1 шт.</strong></p>
+            <p class="preview-total-row">Итого: <strong id="preview-total">5000 ₸</strong></p>
+          </div>
+
+          <h3>Готовые билеты:</h3>
+          <div id="issued-tickets-list" class="issued-tickets-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
